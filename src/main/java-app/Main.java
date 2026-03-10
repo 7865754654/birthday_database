@@ -4,6 +4,7 @@ import models.Person;
 import service.PersonService;
 import service.PersonServiceImpl;
 
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -20,8 +21,14 @@ public class Main {
     private static PersonService service = new PersonServiceImpl(dao);
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
-    public static void main(String[] args) {
-        System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8));
+    public static void main(String[] args) throws UnsupportedEncodingException {
+        // Принудительно UTF-8
+        System.setOut(new PrintStream(System.out, true, "UTF-8"));
+        System.setErr(new PrintStream(System.err, true, "UTF-8"));
+
+        System.out.println("Привет, мир!");
+        System.out.println("Тест русских символов: абвгдеёжз");
+
 
 
         // Создание таблицы
@@ -132,7 +139,7 @@ public class Main {
             }
         }
     }
-    // 6. Удалить человека из БД
+
     private static void deleteUser() {
         //Удалить пользователя по id
         System.out.println("Введите id человека для удаления:");
