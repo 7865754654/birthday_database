@@ -22,20 +22,26 @@ public class PersonServiceImpl implements PersonService {
 
     private void validatePerson(Person person) {
         if (person == null) {
+            System.out.println("[ERROR] Попытка добавить null пользователя");
             throw new IllegalArgumentException("Person не может быть null");
         }
 
         if (person.getName() == null || person.getName().isBlank()) {
+            System.out.println("[ERROR] Попытка добавить пользователя с пустым именем");
             throw new IllegalArgumentException("Имя не может быть пустым");
         }
 
         if (person.getBirthday() == null) {
+            System.out.println("[ERROR] Попытка добавить пользователя без даты рождения");
             throw new IllegalArgumentException("Дата рождения обязательна");
         }
 
         if (person.getBirthday().isAfter(LocalDate.now())) {
+            System.out.println("[ERROR] Попытка добавить пользователя с будущей датой рождения: " + person.getBirthday());
             throw new IllegalArgumentException("Дата рождения не может быть в будущем");
         }
+
+        System.out.println("[INFO] Пользователь " + person.getName() + " прошел валидацию");
     }
 
 
